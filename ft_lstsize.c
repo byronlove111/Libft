@@ -1,40 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strncmp.c                                       :+:      :+:    :+:   */
+/*   ft_lstsize.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: abbouras <abbouras@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/24 16:17:05 by abbouras          #+#    #+#             */
-/*   Updated: 2024/10/24 16:17:05 by abbouras         ###   ########.fr       */
+/*   Created: 2024/10/29 18:24:36 by abbouras          #+#    #+#             */
+/*   Updated: 2024/10/29 18:24:36 by abbouras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int	ft_strncmp(const char *s1, const char *s2, unsigned int n)
+int	ft_lstsize(t_list *lst)
 {
-	unsigned int	i;
+	t_list	*current;
+	int		i;
 
-	if (n == 0)
-		return (0);
 	i = 0;
-	while (i < n && (s1[i] || s2[i]))
+	current = lst;
+	while (current != NULL)
 	{
-		if (s1[i] != s2[i])
-			return (s1[i] - s2[i]);
+		current = current->next;
 		i++;
 	}
-	return (0);
+	return (i);
 }
-
-/*#include <stdlib.h>
-#include <string.h>
-#include <stdio.h>
-#include <ctype.h>
-int	main(int ac, char **av)
-{
-	(void)ac;
-	printf("%d\n", ft_strncmp(av[1], av[2], atoi(av[3])));
-	printf("%d\n", strncmp(av[1], av[2], atoi(av[3])));
-}*/

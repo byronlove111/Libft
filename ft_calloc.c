@@ -12,18 +12,18 @@
 
 #include "libft.h"
 
-void	*ft_calloc(size_t count, size_t size)
+void	*ft_calloc(size_t elementCount, size_t elementSize)
 {
 	unsigned char	*ptr;
 	size_t			i;
 
-	if (size * count > SIZE_MAX)
+	if (elementSize * elementCount > SIZE_MAX)
 		return (NULL);
-	ptr = malloc(size * count);
+	ptr = malloc(elementSize * elementCount);
 	if (!ptr)
 		return (NULL);
 	i = 0;
-	while (i < (count * size))
+	while (i < (elementCount * elementSize))
 	{
 		ptr[i] = 0;
 		i++;

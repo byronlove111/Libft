@@ -12,13 +12,13 @@
 
 #include "libft.h"
 
-int	is_in_charset(char c, char const *str)
+static int	is_in_charset(char c, char const *str)
 {
 	while (*str)
 	{
 		if (c == *str)
 			return (1);
-		*str++;
+		str++;
 	}
 	return (0);
 }
@@ -47,7 +47,7 @@ char	*ft_strtrim(char const *s1, char const *set)
 	char	*str;
 
 	if (!set || !s1)
-		return (ft_strdup(s1));
+		return (NULL);
 	if (ft_strlen(s1) == 0)
 		return (ft_strdup(""));
 	i = 0;

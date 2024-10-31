@@ -39,7 +39,7 @@ char	*alloc_word(char const *s, char c)
 	i = 0;
 	while (s[i] != c && s[i])
 		i++;
-	w = malloc(sizeof(char) * i + 1);
+	w = malloc(sizeof(char) * (i + 1));
 	if (!w)
 		return (NULL);
 	i = 0;
@@ -49,17 +49,11 @@ char	*alloc_word(char const *s, char c)
 	return (w);
 }
 
-char	**ft_split(char const *s, char c)
+void	add_words_to_array(char **strs, char const *s, char c)
 {
-	int		i;
-	char	**strs;
+	int	i;
 
-	if (!s)
-		return (NULL);
 	i = 0;
-	strs = malloc(sizeof(char *) * count_words(s, c) + 1);
-	if (!strs)
-		return (NULL);
 	while (*s)
 	{
 		while (*s == c && *s)
@@ -68,13 +62,33 @@ char	**ft_split(char const *s, char c)
 		{
 			strs[i] = alloc_word(s, c);
 			if (!strs[i])
-				return (NULL);
+				return ;
 			i++;
 			while (*s != c && *s)
 				s++;
 		}
 	}
 	strs[i] = NULL;
+}
+
+char	**ft_split(char const *s, char c)
+{
+	char	**strs;
+
+	if (!s)
+		return (NULL);
+	if (*s == '\0')
+	{
+		strs = malloc(sizeof(char *));
+		if (!strs)
+			return (NULL);
+		strs[0] = NULL;
+		return (strs);
+	}
+	strs = malloc(sizeof(char *) * (count_words(s, c) + 1));
+	if (!strs)
+		return (NULL);
+	add_words_to_array(strs, s, c);
 	return (strs);
 }
 

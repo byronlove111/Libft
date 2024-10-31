@@ -21,19 +21,19 @@ $(NAME): $(OBJ)
 %.o: %.c
 	$(CC) $(FLAGS) -c $< -o $@
 
+so:
+	$(CC) -nostartfiles -fPIC $(CFLAGS) $(SRC)
+	gcc -nostartfiles -shared -o libft.so $(OBJ)
+
 bonus: $(OBJ) $(BONUS_OBJ)
 	$(AR) $(NAME) $(OBJ) $(BONUS_OBJ)
-
-so: $(OBJ)
-	$(CC) -nostartfiles -fPIC $(FLAGS) $(SRC)
-	$(CC) -nostartfiles -shared -o libft.so $(OBJ)
 
 clean:
 	rm -rf $(OBJ) $(BONUS_OBJ)
 
 fclean: clean
-	rm -rf $(NAME) libft.so
+	rm -rf $(NAME)
 
 re: fclean all
 
-.PHONY: clean fclean re bonus all so
+.PHONY: clean fclean re bonus all

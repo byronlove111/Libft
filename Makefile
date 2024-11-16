@@ -1,3 +1,15 @@
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: abbouras <abbouras@student.42.fr>          +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2024/11/16 15:48:01 by abbouras          #+#    #+#              #
+#    Updated: 2024/11/16 15:50:56 by abbouras         ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
+
 CC = cc
 
 CFLAGS = -Wall -Wextra -Werror
@@ -21,7 +33,7 @@ all: $(NAME)
 .c.o:
 	${CC} ${CFLAGS} -c $< -o ${<:.c=.o}
 
-bonus: $(OBJ) $(BONUS_OBJ)
+bonus: $(NAME) $(BONUS_OBJ)
 	$(AR) $(NAME) $(BONUS_OBJ)
 
 clean: 

@@ -119,5 +119,5 @@ To use libft in your project, follow these steps:
 ```
 2. Link library when compiling your project
 ```sh
-gcc -Wall -Wextra -Werror -Iincludes -L. -lft your_program.c
+cc -Wall -Wextra -Werror -L. -lft your_program.c
 ```

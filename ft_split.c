@@ -6,7 +6,7 @@
 /*   By: abbouras <abbouras@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/27 16:17:40 by abbouras          #+#    #+#             */
-/*   Updated: 2024/10/27 16:17:40 by abbouras         ###   ########.fr       */
+/*   Updated: 2024/11/16 13:47:19 by abbouras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,16 @@ int	count_words(char const *s, char c)
 	return (count);
 }
 
+void	free_split(char **strs, int i)
+{
+	while (i <= 0)
+	{
+		free(strs[i]);
+		i--;
+	}
+	free(strs);
+}
+
 char	*alloc_word(char const *s, char c)
 {
 	int		i;
@@ -49,7 +59,7 @@ char	*alloc_word(char const *s, char c)
 	return (w);
 }
 
-void	add_words_to_array(char **strs, char const *s, char c)
+int	add_words_to_array(char **strs, char const *s, char c)
 {
 	int	i;
 
@@ -62,13 +72,17 @@ void	add_words_to_array(char **strs, char const *s, char c)
 		{
 			strs[i] = alloc_word(s, c);
 			if (!strs[i])
-				return ;
+			{
+				free_split(strs, i - 1);
+				return (0);
+			}
 			i++;
 			while (*s != c && *s)
 				s++;
 		}
 	}
 	strs[i] = NULL;
+	return (1);
 }
 
 char	**ft_split(char const *s, char c)
@@ -88,7 +102,8 @@ char	**ft_split(char const *s, char c)
 	strs = malloc(sizeof(char *) * (count_words(s, c) + 1));
 	if (!strs)
 		return (NULL);
-	add_words_to_array(strs, s, c);
+	if (!add_words_to_array(strs, s, c))
+		return (NULL);
 	return (strs);
 }
 

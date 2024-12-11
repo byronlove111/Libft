@@ -16,6 +16,12 @@
 # include <stdint.h>
 # include <stdio.h>
 # include <unistd.h>
+# include <stdarg.h>
+# include <fcntl.h>
+
+# ifndef BUFFER_SIZE
+#  define BUFFER_SIZE 5
+# endif
 
 typedef struct s_list
 {
@@ -23,6 +29,26 @@ typedef struct s_list
 	struct s_list	*next;
 }				t_list;
 
+// Fonctions ft_printf
+size_t	_strlen(const char *s);
+int		ft_printf(const char *str, ...);
+void	_putchar_fd(char c, int fd, int *ct);
+void	_putstr_fd(char *s, int fd, int *ct);
+void	_putnbr_fd(int n, int fd, int *ct);
+void	_putnbr_base_ul(unsigned long nbr, char *base, int *ct);
+
+// Fonctions get_next_line
+size_t	__strlen(const char *s);
+char	*_strchr(const char *s, int c);
+void	*_calloc(size_t elementCount, size_t elementSize);
+char	*_strjoin(char const *s1, char const *s2);
+char	*read_and_store_buffer(int fd, char *res);
+char	*get_next_line(int fd);
+char	*extract_current_line(char *buffer);
+char	*extract_stash(char *buffer);
+char	*join_and_free(char *stash, char *buffer);
+
+// Fonctions libft
 void	ft_bzero(void *s, size_t n);
 void	*ft_memchr(const void *s, int c, size_t n);
 void	*ft_memcpy(void *dest, const void *src, size_t n);
